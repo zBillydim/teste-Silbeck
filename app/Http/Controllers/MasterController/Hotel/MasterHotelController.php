@@ -11,11 +11,11 @@ use App\Http\Controllers\Controller;
 
 class MasterHotelController extends Controller
 {
-    public function index($id): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $hotels = Hotel::all()->paginate(10);
-        if($id){
-            $hotels = Hotel::find($id);
+        $hotels = Hotel::all();
+        if($request->id){
+            $hotels = Hotel::find($request->id);
         }
         if(!$hotels){
             return response()->json([

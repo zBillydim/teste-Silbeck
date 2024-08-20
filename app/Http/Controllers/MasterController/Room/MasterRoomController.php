@@ -6,14 +6,15 @@ use App\Models\Room;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class MasterRoomController extends Controller
 {
-    public function index($id): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        if($id){
-            $rooms = Room::find($id);
+        if($request->id){
+            $rooms = Room::find($request->id);
             if(!$rooms){
                 return response()->json([
                     'success' => false,

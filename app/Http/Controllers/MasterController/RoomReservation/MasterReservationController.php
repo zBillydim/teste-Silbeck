@@ -6,6 +6,7 @@ use App\Http\Requests\UpdateReservationRequest;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Models\RoomReservation;
+use Illuminate\Http\Request;
 class MasterReservationController extends Controller
 {
     public function store(StoreReservationRequest $request): JsonResponse
@@ -21,10 +22,10 @@ class MasterReservationController extends Controller
         ], 201);
     }
 
-    public function index($id): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        if($id){
-            $reservations = RoomReservation::find($id);
+        if($request->id){
+            $reservations = RoomReservation::find($request->id);
             if(!$reservations){
                 return response()->json([
                     'success' => false,

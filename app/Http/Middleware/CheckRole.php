@@ -16,11 +16,11 @@ class CheckRole
      * @param  string  $role
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, string $role)
+    public function r(Request $request, Closure $next, string $role)
     {
         if (Auth::check() && Auth::user()->role === $role) {
             return $next($request);
         }
-        return response()->json(['error' => 'Forbidden'], 403);
+        return response()->json(['success' => false, 'message' => 'You do not have permission to access this resource.'], 403);
     }
 }
